@@ -1,4 +1,4 @@
-var numSoldiers = 17;
+var numSoldiers = 12;
 
 /*var soldiers = [-1]
 for(i = 0; i < numSoldiers; i++) {
@@ -14,7 +14,7 @@ soldiers.push(-1);
 
 var layers = [];
 layers.push(soldiers)
-for(i = 0; i < 100; i++) {
+for(i = 0; i < 500; i++) {
   var o = layers[i]
   var n = [-1];
   for(j = 1; j < numSoldiers + 1; j++) {
@@ -59,7 +59,9 @@ function basicAutomata(l, c, r) {
   if(val == "302" || val == "203") return 1;
 
   if(val == "105" || val == "501") return 1; //Case for when breaking up odd numbered spaces just before intersection
-  //if(val == "320" || val == "023") return 1; //edge case for two wide
+  if(val == "320" || val == "023") return 1; //edge case for two wide
+  if(val == "360" || val == "063") return 1;
+
 
 
 
@@ -78,6 +80,11 @@ function basicAutomata(l, c, r) {
   if(val == "221" || val == "122") return 5;
   if(val == "052" || val == "250") return 4;
   if(val == "040") return 4;
+
+  //start for 2 wide
+  if(val == "133" || val == "331") return 2;
+  if(val == "545") return 2;
+
 
 
 
@@ -103,8 +110,6 @@ function basicAutomata(l, c, r) {
   if(val == "262") return 1;
   if(val == "010") return 2;
 
-  //Closest reflections
-  if(val == "622" || val == "226") return 8;
 
 
 
@@ -125,6 +130,9 @@ function basicAutomata(l, c, r) {
 
 
 
+  //Terminating
+  if(val == "622" || val == "226") return 8;
+  if(l == 8 || c == 8 || r == 8) return 9;
 
 
 
