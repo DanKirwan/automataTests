@@ -1,4 +1,4 @@
-var numSoldiers = 11;
+var numSoldiers = 33;
 
 /*var soldiers = [-1]
 for(i = 0; i < numSoldiers; i++) {
@@ -14,7 +14,7 @@ soldiers.push(-1);
 
 var layers = [];
 layers.push(soldiers)
-for(i = 0; i < 50; i++) {
+for(i = 0; i < 400; i++) {
   var o = layers[i]
   var n = [-1];
   for(j = 1; j < numSoldiers + 1; j++) {
@@ -50,11 +50,11 @@ function automataTwo(l, c, r) {
   var val = "" + l  + c  + r;
   var valInv = "" + r + c + l;
 
-  //for(x = 0; x < 2; x++) {
+  for(x = 0; x < 2; x++) {
     //020 or edge is a fork, 1 is fast wave, 3 is return?
     //Fast wave propagation
     if(val == "100") return 1;
-    if(val == "210") return 1;
+    if(val == "010") return 1;
     if(val == "111") return 1;
     if(val == "110") return 1;
 
@@ -63,31 +63,48 @@ function automataTwo(l, c, r) {
 
     //Slow wave
     if(val == "-110") return 2;
-    if(val == "-121") return 3;//s1
-    if(val == "-131") return 2;//s2
+    if(val == "-121") return 3;
+    if(val == "-130") return 2;
 
     if(val == "021") return 3;//Now away from the edge so make full one
     if(val == "201") return 2;
-    if(val == "011") return 1;//This is to stop the above moving 1spt
-    if(val == "211") return 1;
 
     if(val == "021") return 3;//s1 for non  edge case
-    if(val == "031") return 2;//s2 for non  edge case
+    if(val == "030") return 2;//s2 for non  edge case
+
 
     //reflection
+    //Edge for now
     if(val == "10-1") return 3;
     if(val == "113") return 3;
-    
+
+    //eachother Odd
+    if(val == "101") return 3;
+
+
+
 
 
     //Intersection
-    //if(val == "313") return 2;
-    if(val == "220") return 1;
+    //odd
+    if(val == "303") return 2
+    if(val == "022") return 1;
+    if(val == "222") return 2;
+    if(val == "121") return 3;
+
+    //even
+    if(val == "013") return 2;
 
 
 
-    //val = valInv;
-  //}
+
+
+
+
+
+
+    val = valInv;
+  }
 
 
 
