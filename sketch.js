@@ -1,4 +1,4 @@
-var numSoldiers = 12;
+var numSoldiers = 11;
 
 /*var soldiers = [-1]
 for(i = 0; i < numSoldiers; i++) {
@@ -8,17 +8,17 @@ soldiers.push(-1);*/
 
 var soldiers = [-1];
 //for(i = 0; i < (numSoldiers-1)/2; i++) soldiers.push(0);
-soldiers.push(3);
+soldiers.push(1);
 for(i = 0; i < (numSoldiers-1); i++) soldiers.push(0);
 soldiers.push(-1);
 
 var layers = [];
 layers.push(soldiers)
-for(i = 0; i < 500; i++) {
+for(i = 0; i < 50; i++) {
   var o = layers[i]
   var n = [-1];
   for(j = 1; j < numSoldiers + 1; j++) {
-    n.push(basicAutomata(o[j-1], o[j], o[j+1]));
+    n.push(automataTwo(o[j-1], o[j], o[j+1]));
   }
   n.push(-1);
 
@@ -38,13 +38,68 @@ function draw() {
   var split = numSoldiers + 2;
   for(x = 0; x < layers.length; x++) {
     for(i = 1; i < numSoldiers+1; i++) {
-      fill(layers[x][i] * 10, 100, 100);
+      fill(layers[x][i] * 15, 100, 100);
       rect((width/split) * (i + 1), (width/split) * (x + 1),
             (width/split), (width/split));
     }
   }
 
 }
+
+function automataTwo(l, c, r) {
+  var val = "" + l  + c  + r;
+  var valInv = "" + r + c + l;
+
+  //for(x = 0; x < 2; x++) {
+    //020 or edge is a fork, 1 is fast wave, 3 is return?
+    //Fast wave propagation
+    if(val == "100") return 1;
+    if(val == "210") return 1;
+    if(val == "111") return 1;
+    if(val == "110") return 1;
+
+
+
+
+    //Slow wave
+    if(val == "-110") return 2;
+    if(val == "-121") return 3;//s1
+    if(val == "-131") return 2;//s2
+
+    if(val == "021") return 3;//Now away from the edge so make full one
+    if(val == "201") return 2;
+    if(val == "011") return 1;//This is to stop the above moving 1spt
+    if(val == "211") return 1;
+
+    if(val == "021") return 3;//s1 for non  edge case
+    if(val == "031") return 2;//s2 for non  edge case
+
+    //reflection
+    if(val == "10-1") return 3;
+    if(val == "113") return 3;
+    
+
+
+    //Intersection
+    //if(val == "313") return 2;
+    if(val == "220") return 1;
+
+
+
+    //val = valInv;
+  //}
+
+
+
+
+  return 0;
+}
+
+
+
+
+
+
 
 
 function basicAutomata(l, c, r) {
@@ -61,6 +116,7 @@ function basicAutomata(l, c, r) {
   if(val == "105" || val == "501") return 1; //Case for when breaking up odd numbered spaces just before intersection
   if(val == "320" || val == "023") return 1; //edge case for two wide
   if(val == "360" || val == "063") return 1;
+  if(val == "623" || val == "326") return 1; //this is a fix for 1 wide after fix for 2 wide
 
 
 
@@ -83,7 +139,9 @@ function basicAutomata(l, c, r) {
 
   //start for 2 wide
   if(val == "133" || val == "331") return 2;
-  if(val == "545") return 2;
+  if(val == "543" || val == "345") return 2;
+
+  if(val == "252") return 4; //needed for final layer intersections
 
 
 
@@ -110,6 +168,10 @@ function basicAutomata(l, c, r) {
   if(val == "262") return 1;
   if(val == "010") return 2;
 
+  //even numbered reflections
+  if(val == "211" || val == "112") return 1;
+  if(val == "011" || val == "110") return 2;
+
 
 
 
@@ -128,11 +190,27 @@ function basicAutomata(l, c, r) {
   if(val == "633" || val == "336") return 3;
   if(val == "332" || val == "233") return 3; //extend down one
 
+  if(val == "404") return 2;
+
+
+
 
 
   //Terminating
-  if(val == "622" || val == "226") return 8;
-  if(l == 8 || c == 8 || r == 8) return 9;
+  if(val == "30-1" || val == "-103") return 7;//case for 2
+  if(val == "-13-1") return 7;//case for 1
+  if(val == "-104") return 2;
+
+
+
+
+  if(val == "622" || val == "226") return 7;
+  if(val == "511" || val == "115") return 7;
+  if(l == 7 || c == 7 || r == 7) return 3.5;
+
+
+//misc
+if(val === "222") return 2;
 
 
 
