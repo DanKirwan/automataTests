@@ -76,10 +76,10 @@ function automataTwo(l, c, r) {
     if(val == "-121") return 2;
 
 
-    if(val == "-133") return 2;
 
     if(val == "021") return 3;//Now away from the edge so make full one
     if(val == "201") return 2;
+
 
     if(val == "321") return 3;
 
@@ -94,20 +94,25 @@ function automataTwo(l, c, r) {
 
 
 
+
+
     //reflection
     //Edge for now
     if(val == "10-1") return 3;
     //if(val == "11-1") return 3;
 
     if(val == "113") return 3;
-    if(val == "13-1") return 2;
+    //if(val == "13-1") return 3;
+    if(val == "133") return 2;
     if(val == "132") return 2;
 
     if(val == "-130") return 2;
 
+
+
     //eachother Odd
     if(val == "101") return 3;
-    if(val == "131") return 2;
+    //if(val == "131") return 2;
 
 
 
@@ -122,8 +127,13 @@ function automataTwo(l, c, r) {
     if(val == "030") return 2; //logic applies here but written above
     if(val == "121") return 2;
 
-    if(val == "222") return 3; //This is to allowed 202 used at termination
+    if(val == "222") return 1; //This is to allow 202 used at termination
+    if(val == "031") return 2;
+
+
     if(val == "330") return 2;
+
+
 
 
 
@@ -133,11 +143,20 @@ function automataTwo(l, c, r) {
 
 
     //terminate
-    if(val == "303") return 1;
-    if(val == "-103") return 1;
+
+    //if(val == "-103") return 1;
 
     //Dealing with top from -103
-    if(val == "120") return 2;
+    if(val == "120") return 2; // This is used not reflectively BE AWARE
+    if(val == "212") return 3;
+
+    if(val == "323") return 3;
+    if(val == "-123") return 3;
+
+    if(val == "-133") return 4;
+    if(val == "333") return 4;
+
+
 
 
 
