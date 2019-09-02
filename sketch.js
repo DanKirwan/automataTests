@@ -1,4 +1,4 @@
-var numSoldiers =17;
+var numSoldiers =33;
 
 /*var soldiers = [-1]
 for(i = 0; i < numSoldiers; i++) {
@@ -71,14 +71,14 @@ function automataTwo(l, c, r) {
 
     //Slow wave
 
-    if(val == "-110") return 3;
-    if(val == "310") return 2;
-    if(val == "-131") return 2;
-    if(val == "-122") return 3;
-    if(val == "330") return 2;
+    if(val == "-110") return 2;
+
+    if(val == "-121") return 2;
+
+
+    if(val == "-133") return 2;
 
     if(val == "021") return 3;//Now away from the edge so make full one
-    if(val == "030") return 2;
     if(val == "201") return 2;
 
     if(val == "321") return 3;
@@ -96,12 +96,14 @@ function automataTwo(l, c, r) {
 
     //reflection
     //Edge for now
-    if(val == "10-1") return 1;
-    if(val == "11-1") return 3;
+    if(val == "10-1") return 3;
+    //if(val == "11-1") return 3;
 
     if(val == "113") return 3;
     if(val == "13-1") return 2;
     if(val == "132") return 2;
+
+    if(val == "-130") return 2;
 
     //eachother Odd
     if(val == "101") return 3;
@@ -112,14 +114,16 @@ function automataTwo(l, c, r) {
 
 
 
+
     //Intersection
-    //odd
-    //if(val == "030") return 2; logic applies here but written above
-    /*
+    if(val == "013") return 3;
     if(val == "203") return 3;
     if(val == "232") return 3;
-    if(val == "121") return 3;
-    */
+    if(val == "030") return 2; //logic applies here but written above
+    if(val == "121") return 2;
+
+    if(val == "222") return 3; //This is to allowed 202 used at termination
+    if(val == "330") return 2;
 
 
 
@@ -129,6 +133,11 @@ function automataTwo(l, c, r) {
 
 
     //terminate
+    if(val == "303") return 1;
+    if(val == "-103") return 1;
+
+    //Dealing with top from -103
+    if(val == "120") return 2;
 
 
 
