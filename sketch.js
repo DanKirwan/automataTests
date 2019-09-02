@@ -1,4 +1,4 @@
-var numSoldiers = 33;
+var numSoldiers =17;
 
 /*var soldiers = [-1]
 for(i = 0; i < numSoldiers; i++) {
@@ -38,7 +38,8 @@ function draw() {
   var split = numSoldiers + 2;
   for(x = 0; x < layers.length; x++) {
     for(i = 1; i < numSoldiers+1; i++) {
-      fill(layers[x][i] * 15, 100, 100);
+      fill(layers[x][i] * 25, 100, layers[x][i] == 4 ? 0 : 100);
+
       rect((width/split) * (i + 1), (width/split) * (x + 1),
             (width/split), (width/split));
     }
@@ -52,7 +53,14 @@ function automataTwo(l, c, r) {
 
   for(x = 0; x < 2; x++) {
     //020 or edge is a fork, 1 is fast wave, 3 is return?
+
+
+
+
+    //020 or edge is a fork, 1 is fast wave, 3 is return?
     //Fast wave propagation
+    if(val == "300") return 1;
+
     if(val == "100") return 1;
     if(val == "010") return 1;
     if(val == "111") return 1;
@@ -62,24 +70,43 @@ function automataTwo(l, c, r) {
 
 
     //Slow wave
-    if(val == "-110") return 2;
-    if(val == "-121") return 3;
-    if(val == "-130") return 2;
+
+    if(val == "-110") return 3;
+    if(val == "310") return 2;
+    if(val == "-131") return 2;
+    if(val == "-122") return 3;
+    if(val == "330") return 2;
 
     if(val == "021") return 3;//Now away from the edge so make full one
+    if(val == "030") return 2;
     if(val == "201") return 2;
 
-    if(val == "021") return 3;//s1 for non  edge case
-    if(val == "030") return 2;//s2 for non  edge case
+    if(val == "321") return 3;
+
+    if(val == "020") return 2;
+    if(val == "022") return 2;
+    if(val == "221") return 3;
+    if(val == "230") return 2;
+
+
+
+
+
 
 
     //reflection
     //Edge for now
-    if(val == "10-1") return 3;
+    if(val == "10-1") return 1;
+    if(val == "11-1") return 3;
+
     if(val == "113") return 3;
+    if(val == "13-1") return 2;
+    if(val == "132") return 2;
 
     //eachother Odd
     if(val == "101") return 3;
+    if(val == "131") return 2;
+
 
 
 
@@ -87,13 +114,26 @@ function automataTwo(l, c, r) {
 
     //Intersection
     //odd
-    if(val == "303") return 2
-    if(val == "022") return 1;
-    if(val == "222") return 2;
+    //if(val == "030") return 2; logic applies here but written above
+    /*
+    if(val == "203") return 3;
+    if(val == "232") return 3;
     if(val == "121") return 3;
+    */
+
+
 
     //even
-    if(val == "013") return 2;
+    //if(val == "013") return 2;
+
+
+
+    //terminate
+
+
+
+
+
 
 
 
@@ -105,6 +145,7 @@ function automataTwo(l, c, r) {
 
     val = valInv;
   }
+
 
 
 
